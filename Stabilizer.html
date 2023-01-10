@@ -1,0 +1,2440 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Stablizer Formalism (stabilizer) &#8212; PyClifford</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">PyClifford</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    PyClifford - an python based simulator for Clifford-dominated quantum circuits
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="chapters/PauliIntro.html">
+   1. Pauli operators and its functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="chapters/Pauli1.html">
+     Pauli operator
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="chapters/Pauli2.html">
+     Pauli Algebra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="chapters/Pauli3.html">
+     Convert to Qutip objects
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="chapters/StabilizerIntro.html">
+   Stabilizer States and Clifford Maps
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="chapters/Stabilizer1.html">
+     Construct Clifford Maps
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="chapters/Stabilizer2.html">
+     The methods for Clifford maps
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="chapters/Stabilizer3.html">
+     The methods for stabilizer states
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/hongyehu/PyClifford/master?urlpath=tree/docs/Stabilizer.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/hongyehu/PyClifford"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/hongyehu/PyClifford/issues/new?title=Issue%20on%20page%20%2FStabilizer.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/Stabilizer.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-idea-state-map-duality">
+   General Idea: State-Map Duality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-usage">
+   Basic Usage
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructors">
+     Constructors
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#construct-clifford-maps">
+       Construct Clifford Maps
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#construct-stabilizer-states">
+       Construct Stabilizer States
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#low-level-constructor">
+       Low level constructor
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#state-map-conversion">
+       State-Map Conversion
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clifford-map-methods">
+     Clifford Map Methods
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#map-embedding">
+       - Map Embedding
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#map-composition">
+       - Map Composition
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#map-inversion">
+       - Map Inversion
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stabilizer-state-methods">
+     Stabilizer State Methods
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#active-stabilizers">
+       <strong>
+        Active stabilizers
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#measurement">
+       <strong>
+        Measurement
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#expectation">
+       <strong>
+        Expectation
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stabilizer-state-overlap">
+       <strong>
+        Stabilizer state overlap
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bit-string-probability">
+       <strong>
+        Bit-string probability
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#transform-stabilzier-state-by-rotation-clifford-transformation">
+       <strong>
+        Transform stabilzier state by rotation/Clifford transformation
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sample-stabilizers-in-the-group">
+       <strong>
+        Sample stabilizers in the group
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#entropy">
+       <strong>
+        Entropy
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#copy">
+       <strong>
+        Copy
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#set-rank">
+       <strong>
+        Set Rank
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sample">
+       <strong>
+        Sample
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#density-matrix">
+       <strong>
+        Density matrix
+       </strong>
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-little-hack-into-the-design">
+   A little hack into the design
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stabilizerstate">
+     StabilizerState
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-representation-of-density-matrix">
+       The Representation of Density Matrix
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#binary-representation-of-pauli-operators">
+       Binary Representation of Pauli Operators
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stabilizer-tableau">
+       Stabilizer Tableau
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#link-with-qutip-library">
+   Link with QuTip Library
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#development">
+   Development
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-unit-two-pure-state-overlap">
+     Test Unit: two pure state overlap
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-unit-pure-state-a-overlap-with-mixed-state-b">
+     Test Unit: pure state A overlap with mixed state B
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Stablizer Formalism (stabilizer)</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-idea-state-map-duality">
+   General Idea: State-Map Duality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-usage">
+   Basic Usage
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructors">
+     Constructors
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#construct-clifford-maps">
+       Construct Clifford Maps
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#construct-stabilizer-states">
+       Construct Stabilizer States
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#low-level-constructor">
+       Low level constructor
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#state-map-conversion">
+       State-Map Conversion
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clifford-map-methods">
+     Clifford Map Methods
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#map-embedding">
+       - Map Embedding
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#map-composition">
+       - Map Composition
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#map-inversion">
+       - Map Inversion
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stabilizer-state-methods">
+     Stabilizer State Methods
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#active-stabilizers">
+       <strong>
+        Active stabilizers
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#measurement">
+       <strong>
+        Measurement
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#expectation">
+       <strong>
+        Expectation
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stabilizer-state-overlap">
+       <strong>
+        Stabilizer state overlap
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bit-string-probability">
+       <strong>
+        Bit-string probability
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#transform-stabilzier-state-by-rotation-clifford-transformation">
+       <strong>
+        Transform stabilzier state by rotation/Clifford transformation
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sample-stabilizers-in-the-group">
+       <strong>
+        Sample stabilizers in the group
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#entropy">
+       <strong>
+        Entropy
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#copy">
+       <strong>
+        Copy
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#set-rank">
+       <strong>
+        Set Rank
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sample">
+       <strong>
+        Sample
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#density-matrix">
+       <strong>
+        Density matrix
+       </strong>
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-little-hack-into-the-design">
+   A little hack into the design
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stabilizerstate">
+     StabilizerState
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-representation-of-density-matrix">
+       The Representation of Density Matrix
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#binary-representation-of-pauli-operators">
+       Binary Representation of Pauli Operators
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stabilizer-tableau">
+       Stabilizer Tableau
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#link-with-qutip-library">
+   Link with QuTip Library
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#development">
+   Development
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-unit-two-pure-state-overlap">
+     Test Unit: two pure state overlap
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-unit-pure-state-a-overlap-with-mixed-state-b">
+     Test Unit: pure state A overlap with mixed state B
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># will autoupdate any of the packages imported:</span>
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">context</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="stablizer-formalism-stabilizer">
+<h1>Stablizer Formalism (<code class="docutils literal notranslate"><span class="pre">stabilizer</span></code>)<a class="headerlink" href="#stablizer-formalism-stabilizer" title="Permalink to this headline">#</a></h1>
+<section id="general-idea-state-map-duality">
+<h2>General Idea: State-Map Duality<a class="headerlink" href="#general-idea-state-map-duality" title="Permalink to this headline">#</a></h2>
+<p>Every stabilizer state <span class="math notranslate nohighlight">\(\rho\)</span> is dual to a Clifford unitary <span class="math notranslate nohighlight">\(U\)</span>, such that the state can be generated from the zero state <span class="math notranslate nohighlight">\(|00\cdots0\rangle\)</span> as
+$<span class="math notranslate nohighlight">\(\rho = U|00\cdots0\rangle\langle 00\cdots0|U^\dagger\)</span><span class="math notranslate nohighlight">\(.
+Both \)</span>\rho<span class="math notranslate nohighlight">\( and \)</span>U$ describes a stabilizer code:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\rho\)</span> is a projection operator that specifies the code subspace of the stabilizer code.</p></li>
+<li><p><span class="math notranslate nohighlight">\(U\)</span> is the encoding Clifford unitary that encodes the logical + syndrome qubits to the physical qubits in the stabilizer code.</p></li>
+</ul>
+<p>The package <code class="docutils literal notranslate"><span class="pre">stabilizer</span></code> (based on <code class="docutils literal notranslate"><span class="pre">paulialg</span></code>) provides related functions to represent stabilizer states and Clifford maps. There are two classes defined in this package.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stabilizer.CliffordMap</span></code>. Since the Clifford unitary <span class="math notranslate nohighlight">\(U\)</span> maps Pauli operators to Pauli operators, it is sufficient to specify a Clifford unitary by how each single-qubit Pauli operator transforms under the unitary. Such transformation rules are stored in a table called the Clifford map.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stabilizer.StabilizerState</span></code>. The stabilizer state is specified by a set of stabilizers and the corresponding destabilizers. Using the binary representation of Pauli operators, they can be stored in a table, called the stabilizer tableau.</p></li>
+</ul>
+<p>Since both classes need to store a table of Pauli operators, they are both realized as subclasses of <code class="docutils literal notranslate"><span class="pre">paulialg.PauliList</span></code>.</p>
+</section>
+<section id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">#</a></h2>
+<hr class="docutils" />
+<section id="constructors">
+<h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">#</a></h3>
+<section id="construct-clifford-maps">
+<h4>Construct Clifford Maps<a class="headerlink" href="#construct-clifford-maps" title="Permalink to this headline">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">identity_map(N)</span></code> constructs an identity Clifford map on <span class="math notranslate nohighlight">\(N\)</span> qubits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">identity_map</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; +XIII
+  Z0-&gt; +ZIII
+  X1-&gt; +IXII
+  Z1-&gt; +IZII
+  X2-&gt; +IIXI
+  Z2-&gt; +IIZI
+  X3-&gt; +IIIX
+  Z3-&gt; +IIIZ)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">identity_map</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">ps</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 0, 0, 0, 0, 0, 0])
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">random_pauli_map(N)</span></code> samples a random Clifford map made of random single-qubit Clifford gates on <span class="math notranslate nohighlight">\(N\)</span> qubits, i.e. <span class="math notranslate nohighlight">\(U=\prod_i U_i\in\mathrm{Cl}(2)^N\)</span>. Each realization specifies a random local Pauli basis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">random_pauli_map</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; +ZIII
+  Z0-&gt; -YIII
+  X1-&gt; -IZII
+  Z1-&gt; +IYII
+  X2-&gt; +IIYI
+  Z2-&gt; +IIZI
+  X3-&gt; -IIIY
+  Z3-&gt; +IIIX)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">random_clifford_map(N)</span></code> samples a globally random Clifford map on <span class="math notranslate nohighlight">\(N\)</span> qubits, i.e. <span class="math notranslate nohighlight">\(U\in\mathrm{Cl}(2^N)\)</span>. Each realization specifies a random global stabilizer basis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_map</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; +ZZIZ
+  Z0-&gt; -YZYZ
+  X1-&gt; -YXXI
+  Z1-&gt; -YZXY
+  X2-&gt; +IZYZ
+  Z2-&gt; +ZIZI
+  X3-&gt; -YXXZ
+  Z3-&gt; +YIXY)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">clifford_rotation_map(N)</span></code> constructs a Clifford map based for a Clifford rotation given its generator.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">clifford_rotation_map</span><span class="p">(</span><span class="s1">&#39;-XXYZ&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; +XIII
+  Z0-&gt; +YXYZ
+  X1-&gt; +IXII
+  Z1-&gt; +XYYZ
+  X2-&gt; +XXZZ
+  Z2-&gt; -XXXZ
+  X3-&gt; -XXYY
+  Z3-&gt; +IIIZ)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="construct-stabilizer-states">
+<h4>Construct Stabilizer States<a class="headerlink" href="#construct-stabilizer-states" title="Permalink to this headline">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">maximally_mixed_state(N)</span></code> constructs a <span class="math notranslate nohighlight">\(N\)</span>-qubit maximally mixed state (by setting the density matrix to full rank).
+$<span class="math notranslate nohighlight">\(\rho=2^{-N}\mathbb{1}.\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">maximally_mixed_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState()
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">zero_state(N)</span></code> constructs a <span class="math notranslate nohighlight">\(N\)</span>-qubit all-zero state
+$<span class="math notranslate nohighlight">\(\rho=|0\cdots0\rangle\langle 0\cdots0|=\prod_{i}\frac{1+Z_i}{2}.\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">zero_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +ZIII
+   +IZII
+   +IIZI
+   +IIIZ)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">one_state(N)</span></code> constructs a <span class="math notranslate nohighlight">\(N\)</span>-qubit all-one state
+$<span class="math notranslate nohighlight">\(\rho=|1\cdots1\rangle\langle 1\cdots1|=\prod_{i}\frac{1-Z_i}{2}.\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">one_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.06250 IIII -0.06250 IIIZ -0.06250 IIZI -0.06250 IIZZ -0.06250 IZII -0.06250 IZIZ -0.06250 IZZI -0.06250 IZZZ -0.06250 ZIII -0.06250 ZIIZ -0.06250 ZIZI -0.06250 ZIZZ -0.06250 ZZII -0.06250 ZZIZ -0.06250 ZZZI -0.06250 ZZZZ
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ghz_state(N)</span></code> constructs a <span class="math notranslate nohighlight">\(N\)</span>-qubit GHZ state
+$<span class="math notranslate nohighlight">\(\rho = |\Psi\rangle\langle\Psi|, \qquad \text{with }|\Psi\rangle=\frac{1}{\sqrt{2}}(|0\cdots0\rangle+|1\cdots1\rangle).\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">ghz_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +ZZII
+   +IZZI
+   +IIZZ
+   +XXXX)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">random_pauli_map(N)</span></code> samples a <span class="math notranslate nohighlight">\(N\)</span> qubit random Pauli state.
+$<span class="math notranslate nohighlight">\(\rho=U|0\cdots0\rangle\langle 0\cdots0|U^\dagger,\qquad\text{with }U\in \mathrm{Cl}(2)^N.\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">random_pauli_map</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; -ZIII
+  Z0-&gt; +XIII
+  X1-&gt; -IZII
+  Z1-&gt; +IYII
+  X2-&gt; -IIYI
+  Z2-&gt; -IIXI
+  X3-&gt; +IIIX
+  Z3-&gt; +IIIY)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">random_clifford_map(N)</span></code> samples a <span class="math notranslate nohighlight">\(N\)</span> qubit random Clifford (random stabilizer) state.
+$<span class="math notranslate nohighlight">\(\rho=U|0\cdots0\rangle\langle 0\cdots0|U^\dagger,\qquad\text{with }U\in \mathrm{Cl}(2^N).\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +YYZZ
+   +ZZXX
+   +YXYZ
+   +XZXY)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">stabilizer_state(...)</span></code> is a universal constructor of stabilizer state by specifying all stabilizers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">stabilizer_state</span><span class="p">(</span><span class="s1">&#39;XXY&#39;</span><span class="p">,</span><span class="s1">&#39;ZZI&#39;</span><span class="p">,</span><span class="s1">&#39;IZZ&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +XXY
+   +ZZI
+   +IZZ)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="low-level-constructor">
+<h4>Low level constructor<a class="headerlink" href="#low-level-constructor" title="Permalink to this headline">#</a></h4>
+<p>The user can also construct stabilizer state by low-level constructor <code class="docutils literal notranslate"><span class="pre">StabilizerState(gs,</span> <span class="pre">ps,</span> <span class="pre">r=0)</span></code>:</p>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gs:</span> <span class="pre">int</span> <span class="pre">(2*N,</span> <span class="pre">2*N)</span></code>: strings of Pauli operators in the stabilizer tableau.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ps:</span> <span class="pre">int</span> <span class="pre">(2*N)</span></code>: phase indicators (should only be 0 or 2).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r:</span>&#160; <span class="pre">int</span></code>: number of logical qubits (log2 rank of density matrix)’’’</p></li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul class="simple">
+<li><p>Object of <code class="docutils literal notranslate"><span class="pre">StabilizerState</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmp_state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tmp_state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +ZZY
+   +YIZ
+   +IZI)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gs</span> <span class="o">=</span> <span class="n">tmp_state</span><span class="o">.</span><span class="n">gs</span>
+<span class="n">gs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 1, 0, 1, 1, 1],
+       [1, 1, 0, 0, 0, 1],
+       [0, 0, 0, 1, 0, 0],
+       [1, 1, 0, 1, 0, 0],
+       [1, 1, 0, 0, 1, 0],
+       [1, 0, 1, 0, 1, 1]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">tmp_state</span><span class="o">.</span><span class="n">ps</span>
+<span class="n">ps</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 0, 0, 0, 0])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">StabilizerState</span><span class="p">(</span><span class="n">gs</span><span class="o">=</span><span class="n">gs</span><span class="p">,</span> <span class="n">ps</span> <span class="o">=</span> <span class="n">ps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +ZZY
+   +YIZ
+   +IZI)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">StabilizerState</span><span class="p">(</span><span class="n">gs</span><span class="o">=</span><span class="n">gs</span><span class="p">,</span> <span class="n">ps</span> <span class="o">=</span> <span class="n">ps</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +YIZ
+   +IZI)
+</pre></div>
+</div>
+</div>
+</div>
+<p>A hack to inspect the full stabilizer tableau is by converting <code class="docutils literal notranslate"><span class="pre">StabilizerState</span></code> to <code class="docutils literal notranslate"><span class="pre">PauliList</span></code> by</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">stabilizer_state</span><span class="p">(</span><span class="s1">&#39;XXY&#39;</span><span class="p">,</span><span class="s1">&#39;ZZI&#39;</span><span class="p">,</span><span class="s1">&#39;IZZ&#39;</span><span class="p">)[:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> +XXY
+ +ZZI
+ +IZZ
+ +ZII
+ +ZXX
+ +ZIX
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-block alert-danger">
+User need to <b>ensure</b> that stabilizers commute with each other, otherwise an error will be raised.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">stabilizer_state</span><span class="p">(</span><span class="s1">&#39;XXY&#39;</span><span class="p">,</span><span class="s1">&#39;-YYI&#39;</span><span class="p">,</span><span class="s1">&#39;IZZ&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">Input In [21],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">stabilizer_state</span><span class="p">(</span><span class="s1">&#39;XXY&#39;</span><span class="p">,</span><span class="s1">&#39;-YYI&#39;</span><span class="p">,</span><span class="s1">&#39;IZZ&#39;</span><span class="p">)</span>
+
+<span class="nn">File ~/Dropbox/Projects/Harvard/PyCliffordBook/PyBook/src/stabilizer.py:278,</span> in <span class="ni">stabilizer_state</span><span class="nt">(*stabilizers)</span>
+<span class="g g-Whitespace">    </span><span class="mi">276</span> <span class="c1"># validity check:</span>
+<span class="g g-Whitespace">    </span><span class="mi">277</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">acq_mat</span><span class="p">(</span><span class="n">stabilizers</span><span class="o">.</span><span class="n">gs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">278</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;stabilizers must all commute with each other.&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">279</span> <span class="n">state</span> <span class="o">=</span> <span class="n">maximally_mixed_state</span><span class="p">(</span><span class="n">stabilizers</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">280</span> <span class="n">state</span><span class="o">.</span><span class="n">gs</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">stabilizer_project</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">gs</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">stabilizers</span><span class="o">.</span><span class="n">gs</span><span class="p">),</span> <span class="n">state</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: stabilizers must all commute with each other.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="state-map-conversion">
+<h4>State-Map Conversion<a class="headerlink" href="#state-map-conversion" title="Permalink to this headline">#</a></h4>
+<p>Stabilizer states and Clifford maps can be mapped to each other.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">stabilizer_state</span><span class="p">(</span><span class="s1">&#39;XXX&#39;</span><span class="p">,</span><span class="s1">&#39;ZZI&#39;</span><span class="p">,</span><span class="s1">&#39;IZZ&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;quantum state: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">rho</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>quantum state: 
+ StabilizerState(
+   +IZZ
+   +ZZI
+   +XXX)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">to_map</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; +IIX
+  Z0-&gt; +IZZ
+  X1-&gt; +IXX
+  Z1-&gt; +ZZI
+  X2-&gt; +ZII
+  Z2-&gt; +XXX)
+</pre></div>
+</div>
+</div>
+</div>
+<p>And Clifford map can be converted back to the stabilizer state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">to_map</span><span class="p">()</span><span class="o">.</span><span class="n">to_state</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +IZZ
+   +ZZI
+   +XXX)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.to_map()</span></code> and <code class="docutils literal notranslate"><span class="pre">.to_state()</span></code> will make <strong>new copies</strong> of Pauli string data in the memory.</p></li>
+</ul>
+<div class="alert alert-block alert-danger">
+The information about the rank of the density matrix is lost in the Clifford map, so the back conversion will result in a zero rank stabilizer state.
+</div></section>
+</section>
+<hr class="docutils" />
+<section id="clifford-map-methods">
+<h3>Clifford Map Methods<a class="headerlink" href="#clifford-map-methods" title="Permalink to this headline">#</a></h3>
+<section id="map-embedding">
+<h4>- Map Embedding<a class="headerlink" href="#map-embedding" title="Permalink to this headline">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">.embed(small_map,</span> <span class="pre">mask)</span></code> provides the method to embed a smaller Clifford map on a subset of qubits to the current Clifford map. This is a <strong>in-place</strong> operation. The Clifford map object that provide this method will get modified under the embedding.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">small_map</span></code> is a <code class="docutils literal notranslate"><span class="pre">CliffordMap</span></code> object supported on a subset of qubits.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mask</span></code> is a boolean array specifying the subset of qubits.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cmap</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">identity_map</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">cmap</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; +XIIIII
+  Z0-&gt; +ZIIIII
+  X1-&gt; +IXIIII
+  Z1-&gt; +IZIIII
+  X2-&gt; +IIXIII
+  Z2-&gt; +IIZIII
+  X3-&gt; +IIIXII
+  Z3-&gt; +IIIZII
+  X4-&gt; +IIIIXI
+  Z4-&gt; +IIIIZI
+  X5-&gt; +IIIIIX
+  Z5-&gt; +IIIIIZ)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cmap</span><span class="o">.</span><span class="n">embed</span><span class="p">(</span><span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_map</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; +XIIIXI
+  Z0-&gt; +YIIXXI
+  X1-&gt; +IXIIII
+  Z1-&gt; +IZIIII
+  X2-&gt; +IIXIII
+  Z2-&gt; +IIZIII
+  X3-&gt; +IIIIXI
+  Z3-&gt; -ZIIXZI
+  X4-&gt; +IIIXII
+  Z4-&gt; +XIIYII
+  X5-&gt; +IIIIIX
+  Z5-&gt; +IIIIIZ)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="map-composition">
+<h4>- Map Composition<a class="headerlink" href="#map-composition" title="Permalink to this headline">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">.compose(other)</span></code> returns the composition of the current Clifford map with another Clifford map. This will return a new Clifford map without modifying either of the input maps. The Clifford map object which initiates this method will be the preceeding map in the composition.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">other</span></code> - another <code class="docutils literal notranslate"><span class="pre">CliffordMap</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cmap</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_map</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; +XYYXXZ
+  Z0-&gt; -XYXYIY
+  X1-&gt; +XIXXYZ
+  Z1-&gt; +XZIIZZ
+  X2-&gt; -ZZXIIY
+  Z2-&gt; -XYXZXZ
+  X3-&gt; +XZZYXY
+  Z3-&gt; -ZYZYZI
+  X4-&gt; +ZZZYXZ
+  Z4-&gt; +IIZIZZ
+  X5-&gt; -XXXXZY
+  Z5-&gt; +YZXXIX)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="map-inversion">
+<h4>- Map Inversion<a class="headerlink" href="#map-inversion" title="Permalink to this headline">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">.inverse()</span></code> returns the inverse of the current Clifford map. This will return a new Clifford map withoutt modifying the original map. The inverse map is such that its composition with the original map must be identity</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cmap</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">clifford_rotation_map</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">cmap</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; -Z
+  Z0-&gt; +X)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cmap</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; +Z
+  Z0-&gt; -X)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Test on random maps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cmap</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_map</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">cmap</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">cmap</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0 -&gt; +XIIIIIIIIIIIIIIIIIII
+  Z0 -&gt; +ZIIIIIIIIIIIIIIIIIII
+  X1 -&gt; +IXIIIIIIIIIIIIIIIIII
+  Z1 -&gt; +IZIIIIIIIIIIIIIIIIII
+  X2 -&gt; +IIXIIIIIIIIIIIIIIIII
+  Z2 -&gt; +IIZIIIIIIIIIIIIIIIII
+  X3 -&gt; +IIIXIIIIIIIIIIIIIIII
+  Z3 -&gt; +IIIZIIIIIIIIIIIIIIII
+  X4 -&gt; +IIIIXIIIIIIIIIIIIIII
+  Z4 -&gt; +IIIIZIIIIIIIIIIIIIII
+     ...
+  X15-&gt; +IIIIIIIIIIIIIIIXIIII
+  Z15-&gt; +IIIIIIIIIIIIIIIZIIII
+  X16-&gt; +IIIIIIIIIIIIIIIIXIII
+  Z16-&gt; +IIIIIIIIIIIIIIIIZIII
+  X17-&gt; +IIIIIIIIIIIIIIIIIXII
+  Z17-&gt; +IIIIIIIIIIIIIIIIIZII
+  X18-&gt; +IIIIIIIIIIIIIIIIIIXI
+  Z18-&gt; +IIIIIIIIIIIIIIIIIIZI
+  X19-&gt; +IIIIIIIIIIIIIIIIIIIX
+  Z19-&gt; +IIIIIIIIIIIIIIIIIIIZ)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cmap</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">cmap</span><span class="o">.</span><span class="n">inverse</span><span class="p">())</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0 -&gt; +XIIIIIIIIIIIIIIIIIII
+  Z0 -&gt; +ZIIIIIIIIIIIIIIIIIII
+  X1 -&gt; +IXIIIIIIIIIIIIIIIIII
+  Z1 -&gt; +IZIIIIIIIIIIIIIIIIII
+  X2 -&gt; +IIXIIIIIIIIIIIIIIIII
+  Z2 -&gt; +IIZIIIIIIIIIIIIIIIII
+  X3 -&gt; +IIIXIIIIIIIIIIIIIIII
+  Z3 -&gt; +IIIZIIIIIIIIIIIIIIII
+  X4 -&gt; +IIIIXIIIIIIIIIIIIIII
+  Z4 -&gt; +IIIIZIIIIIIIIIIIIIII
+     ...
+  X15-&gt; +IIIIIIIIIIIIIIIXIIII
+  Z15-&gt; +IIIIIIIIIIIIIIIZIIII
+  X16-&gt; +IIIIIIIIIIIIIIIIXIII
+  Z16-&gt; +IIIIIIIIIIIIIIIIZIII
+  X17-&gt; +IIIIIIIIIIIIIIIIIXII
+  Z17-&gt; +IIIIIIIIIIIIIIIIIZII
+  X18-&gt; +IIIIIIIIIIIIIIIIIIXI
+  Z18-&gt; +IIIIIIIIIIIIIIIIIIZI
+  X19-&gt; +IIIIIIIIIIIIIIIIIIIX
+  Z19-&gt; +IIIIIIIIIIIIIIIIIIIZ)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="stabilizer-state-methods">
+<h3>Stabilizer State Methods<a class="headerlink" href="#stabilizer-state-methods" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li></li>
+</ul>
+<section id="active-stabilizers">
+<h4><strong>Active stabilizers</strong><a class="headerlink" href="#active-stabilizers" title="Permalink to this headline">#</a></h4>
+</section>
+<p>&#64;property <code class="docutils literal notranslate"><span class="pre">StabilizerState.stabilizers</span></code> will return the active stabilizers, as PauliList, of the current state</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">ghz_state</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">stabilizers</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> +ZZI
+ +IZZ
+ +XXX
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li></li>
+</ul>
+<section id="measurement">
+<h4><strong>Measurement</strong><a class="headerlink" href="#measurement" title="Permalink to this headline">#</a></h4>
+</section>
+<p><code class="docutils literal notranslate"><span class="pre">StabilizerState.measure(obs)</span></code> measure the stabilizer state on a set of commuting observables.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">obs</span></code> - Observables to measure. The following types are supported:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">PauliList</span></code> - a list of Pauli operators (user must ensure that operators in the list are commuting, otherwise they can not measured simutaneously).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">StabilizerState</span></code> - stabilizers of a stabilizer state is always commuting, which can be treated as commuting observables for measurement.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">out</span></code> - measuremnt outcome, can only be <span class="math notranslate nohighlight">\(0\)</span>, <span class="math notranslate nohighlight">\(1\)</span> for independent Pauli observables on stabilizer state, where 0 means positive (+1) eigenvalue, and 1 means negative (-1) eigenvalue.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">log2prob</span></code> - the log2 of the probability of realizing this particular outcome.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">ghz_state</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">state</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +ZZI
+   +IZZ
+   +XXX)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">paulialg</span><span class="o">.</span><span class="n">paulis</span><span class="p">(</span><span class="s1">&#39;ZII&#39;</span><span class="p">,</span><span class="s1">&#39;IZI&#39;</span><span class="p">,</span><span class="s1">&#39;IIZ&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1, 1, 1]), -1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above example, I created a GHZ state, and did single qubit Z-basis measurements on each of the qubit. We get -1 for all qubits with probility <span class="math notranslate nohighlight">\(2^{-1}=0.5\)</span></p>
+<div class="alert alert-block alert-danger">
+Measurement will <b>in place </b> change the state, as measurement will collapse the quantum state.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">ghz_state</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">paulialg</span><span class="o">.</span><span class="n">paulis</span><span class="p">(</span><span class="s1">&#39;ZII&#39;</span><span class="p">,</span><span class="s1">&#39;IZI&#39;</span><span class="p">,</span><span class="s1">&#39;IIZ&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 0, 0]), -1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">paulialg</span><span class="o">.</span><span class="n">paulis</span><span class="p">(</span><span class="s1">&#39;ZII&#39;</span><span class="p">,</span><span class="s1">&#39;IZI&#39;</span><span class="p">,</span><span class="s1">&#39;IIZ&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 0, 0]), 0.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see the second measurement will return the same measurement result with 100% probability</p>
+<ul class="simple">
+<li></li>
+</ul>
+<section id="expectation">
+<h4><strong>Expectation</strong><a class="headerlink" href="#expectation" title="Permalink to this headline">#</a></h4>
+</section>
+<p><code class="docutils literal notranslate"><span class="pre">StabilizerState.expect()</span></code> provide fast algorithm to evaluate expectation value of:</p>
+<ul class="simple">
+<li><p>Pauli operator</p></li>
+<li><p>Pauli Monomial/Polynomial</p></li>
+<li><p>Overlap between stabilizer states <font color='red'>Warning: currently it only supports pure state overlap with general stabilizer states.</font></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">ghz_state</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">paulialg</span><span class="o">.</span><span class="n">paulis</span><span class="p">(</span><span class="s1">&#39;XXXXX&#39;</span><span class="p">,</span><span class="s1">&#39;IZIII&#39;</span><span class="p">,</span><span class="s1">&#39;-ZZIII&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 1,  0, -1])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pauli_poly</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">paulialg</span><span class="o">.</span><span class="n">pauli</span><span class="p">(</span><span class="s1">&#39;XXXXX&#39;</span><span class="p">)</span><span class="o">+</span><span class="mf">0.2</span><span class="n">j</span><span class="o">*</span><span class="n">paulialg</span><span class="o">.</span><span class="n">pauli</span><span class="p">(</span><span class="s1">&#39;-ZZIII&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">pauli_poly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.5-0.2j)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li></li>
+</ul>
+<section id="stabilizer-state-overlap">
+<h4><strong>Stabilizer state overlap</strong><a class="headerlink" href="#stabilizer-state-overlap" title="Permalink to this headline">#</a></h4>
+</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">ghz_state</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">state2</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;State overlap is:&quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">state2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State overlap is: 0.25
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tate</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">ghz_state</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">state2</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">state2</span><span class="o">.</span><span class="n">set_r</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;State overlap is:&quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">state2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State overlap is: 0.125
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li></li>
+</ul>
+<section id="bit-string-probability">
+<h4><strong>Bit-string probability</strong><a class="headerlink" href="#bit-string-probability" title="Permalink to this headline">#</a></h4>
+</section>
+<p><code class="docutils literal notranslate"><span class="pre">StabilizerState.get_prob(bitstring)</span></code> will return the probability of measuring given bitstring at current stabilizer state.
+<strong>Input</strong></p>
+<ul class="simple">
+<li><p>bitstring: Integer type 1D array
+<strong>Output</strong></p></li>
+<li><p>probability</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">ghz_state</span><span class="p">(</span><span class="mi">625</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">get_prob</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">625</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">stabilizer_state</span><span class="p">(</span><span class="s2">&quot;ZZ&quot;</span><span class="p">,</span><span class="s2">&quot;XX&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">get_prob</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li></li>
+</ul>
+<section id="transform-stabilzier-state-by-rotation-clifford-transformation">
+<h4><strong>Transform stabilzier state by rotation/Clifford transformation</strong><a class="headerlink" href="#transform-stabilzier-state-by-rotation-clifford-transformation" title="Permalink to this headline">#</a></h4>
+</section>
+<p>As a derived class of <code class="docutils literal notranslate"><span class="pre">PauliList</span></code>, <code class="docutils literal notranslate"><span class="pre">StabilizerState</span></code> also support <code class="docutils literal notranslate"><span class="pre">StabilizerState.rotate_by(pauli)</span></code> and <code class="docutils literal notranslate"><span class="pre">StabilizerState.transform_by(clifford_map)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">ghz_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">rotate_by</span><span class="p">(</span><span class="n">paulialg</span><span class="o">.</span><span class="n">pauli</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   -YIXI
+   -XIYI
+   -XZYZ
+   +IYIX)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">ghz_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">transform_by</span><span class="p">(</span><span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_map</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +XIIX
+   -IYZI
+   +YXXZ
+   -ZYZY)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li></li>
+</ul>
+<section id="sample-stabilizers-in-the-group">
+<h4><strong>Sample stabilizers in the group</strong><a class="headerlink" href="#sample-stabilizers-in-the-group" title="Permalink to this headline">#</a></h4>
+</section>
+<p><code class="docutils literal notranslate"><span class="pre">Stabilizer.sample(L)</span></code> will sample <span class="math notranslate nohighlight">\(L\)</span> stabilizers in the stabilizer group</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="o">-</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 1, 1, 0, 1],
+       [0, 1, 0, 1, 0],
+       [1, 0, 0, 0, 0],
+       [0, 1, 1, 1, 0],
+       [1, 1, 0, 0, 1],
+       [0, 1, 0, 1, 1],
+       [1, 0, 1, 0, 1],
+       [1, 1, 0, 1, 0],
+       [1, 0, 1, 0, 0],
+       [0, 0, 0, 1, 0]])
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li></li>
+</ul>
+<section id="entropy">
+<h4><strong>Entropy</strong><a class="headerlink" href="#entropy" title="Permalink to this headline">#</a></h4>
+</section>
+<p><code class="docutils literal notranslate"><span class="pre">StabilizerState.entropy(subsys)</span></code> will calculate the second Renyi entropy of the stabilizer state on subregion.
+<strong>Parameter</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">subsys</span></code>: List containing the location of region</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">entropy</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">entropy</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p>It also support entanglement entropy for mixed state</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">set_r</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">entropy</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li></li>
+</ul>
+<section id="copy">
+<h4><strong>Copy</strong><a class="headerlink" href="#copy" title="Permalink to this headline">#</a></h4>
+</section>
+<p><code class="docutils literal notranslate"><span class="pre">Stabilizer.copy()</span></code> will return a copy of stabilizer state</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">StabilizerState.copy()</span></code> returns a copy of the state, such that the original state will not be touch by modification on the copy state. It is useful to copy the state for measurement (as measurement changes the state).</p>
+<p>Example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_map</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">to_state</span><span class="p">()</span>
+<span class="n">new_state</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li></li>
+</ul>
+<section id="set-rank">
+<h4><strong>Set Rank</strong><a class="headerlink" href="#set-rank" title="Permalink to this headline">#</a></h4>
+</section>
+<p><code class="docutils literal notranslate"><span class="pre">Stabilizer.set_r(r)</span></code> will set the <span class="math notranslate nohighlight">\(\log_2\)</span> rank of stabilizer state. For <span class="math notranslate nohighlight">\(r&gt;0\)</span>, the state is mixed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">set_r</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +ZYXZ
+   +ZZYZ
+   +ZXZI)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li></li>
+</ul>
+<section id="sample">
+<h4><strong>Sample</strong><a class="headerlink" href="#sample" title="Permalink to this headline">#</a></h4>
+</section>
+<p><code class="docutils literal notranslate"><span class="pre">StabilizerState.sample(L)</span></code> will sample <span class="math notranslate nohighlight">\(L\)</span> pauli strings in the stabilizer group</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">ghz_state</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> +IIZIIIIIIZ
+ +XXYXYYXXYX
+ +YYXXXYYXXX
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li></li>
+</ul>
+<section id="density-matrix">
+<h4><strong>Density matrix</strong><a class="headerlink" href="#density-matrix" title="Permalink to this headline">#</a></h4>
+</section>
+<p>&#64;property <code class="docutils literal notranslate"><span class="pre">StabilizerState.density_matrix</span></code> will return density matrix of stabilizer state as <code class="docutils literal notranslate"><span class="pre">PauliPolynomial</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">ghz_state</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">density_matrix</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.12500 III +0.12500 XXX +0.12500 IZZ -0.12500 XYY +0.12500 ZZI -0.12500 YYX +0.12500 ZIZ -0.12500 YXY
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">StabilizerState.set_r(r)</span></code> will set the <span class="math notranslate nohighlight">\(log_2\)</span> rank of stabilizer state. Default value is zero (pure state)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_map</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">to_state</span><span class="p">()</span>
+<span class="n">state</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +XXZY
+   +YIXY
+   +IYXY
+   +XXZI)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">set_r</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +IYXY
+   +XXZI)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="a-little-hack-into-the-design">
+<h2>A little hack into the design<a class="headerlink" href="#a-little-hack-into-the-design" title="Permalink to this headline">#</a></h2>
+<hr class="docutils" />
+<section id="stabilizerstate">
+<h3>StabilizerState<a class="headerlink" href="#stabilizerstate" title="Permalink to this headline">#</a></h3>
+<p>The basic classes in stabilizer are: 1. StabilizerState and 2. CliffordMap, which are linked through state-map duality</p>
+<section id="the-representation-of-density-matrix">
+<h4>The Representation of Density Matrix<a class="headerlink" href="#the-representation-of-density-matrix" title="Permalink to this headline">#</a></h4>
+<p>A <span class="math notranslate nohighlight">\([N,r]\)</span> stabilizer state is describe by the <strong>density matrix</strong> of the following form:
+$<span class="math notranslate nohighlight">\(\rho = \frac{1}{2^r}\prod_{k=1}^{N-r}\frac{1+(-)^{b_k}S_k}{2}.\)</span>$</p>
+<ul class="simple">
+<li><p>Each stabilizer <span class="math notranslate nohighlight">\(S_k\)</span> is a (non-trivial) Pauli operator defined on totally <span class="math notranslate nohighlight">\(N\)</span> qubits. The stabilizers commute with each other <span class="math notranslate nohighlight">\([S_k,S_{k'}]=0\)</span>. They generate an Abelian subgroup <span class="math notranslate nohighlight">\(\mathcal{S}=\{\prod_{k=1}^{N-r} S_k^{a_k}|a_k=0,1\}\)</span> of the <span class="math notranslate nohighlight">\(N\)</span>-qubit Pauli group, called the <em>stabilizer group</em>.</p></li>
+<li><p>Each sign indicator <span class="math notranslate nohighlight">\(b_k=0,1\)</span> is a binary variable specifying the eigen space of the stabilizer.</p></li>
+<li><p>There are totally <span class="math notranslate nohighlight">\(N-r\)</span> stabilizers for a <span class="math notranslate nohighlight">\([N,r]\)</span> stablizer code (of code rate: <span class="math notranslate nohighlight">\(r/N\)</span>). The simultaneous eigenspace of all stabilizers constitutes the <em>code subspace</em>.</p></li>
+<li><p>The code subspace is <span class="math notranslate nohighlight">\(2^r\)</span> dimensional (which is also the rank of the density matrix <span class="math notranslate nohighlight">\(\rho\)</span>). The stabilizer state <span class="math notranslate nohighlight">\(\rho\)</span> is always defined to be the maximally mixed state in the code subspace, such that <span class="math notranslate nohighlight">\(\rho\)</span> is also the <strong>projection operator</strong> that projects any state into the code subspace.</p></li>
+</ul>
+</section>
+<section id="binary-representation-of-pauli-operators">
+<h4>Binary Representation of Pauli Operators<a class="headerlink" href="#binary-representation-of-pauli-operators" title="Permalink to this headline">#</a></h4>
+<p>Any Pauli operator can be specified by two one-hot (binary) vectors <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(z\)</span> (<span class="math notranslate nohighlight">\(x_i,z_i=0,1\)</span> for <span class="math notranslate nohighlight">\(i=1,\cdots,N\)</span>):
+$<span class="math notranslate nohighlight">\(\sigma_{(x,z)}=\mathrm{i}^{x\cdot z}\prod_{i=1}^{N}X_i^{x_i}\prod_{i=1}^{N}Z_i^{z_i}.\)</span>$</p>
+<ul class="simple">
+<li><p>The binary vector <span class="math notranslate nohighlight">\(x\)</span> (or <span class="math notranslate nohighlight">\(z\)</span>) specifies the qubits where the <span class="math notranslate nohighlight">\(X\)</span> (or <span class="math notranslate nohighlight">\(Z\)</span>) operator acts (<span class="math notranslate nohighlight">\(Y\)</span> operator acts at where <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Z\)</span> act simultaneously).</p></li>
+<li><p><strong>Multiplication</strong> of two Pauli operators
+$<span class="math notranslate nohighlight">\(\sigma_{(x,z)}\sigma_{(x',z')}=\mathrm{i}^{p(x,z;x',z')}\sigma_{(x+x',z+z')\%2},\)</span><span class="math notranslate nohighlight">\(
+where the power \)</span>p<span class="math notranslate nohighlight">\( of \)</span>\mathrm{i}<span class="math notranslate nohighlight">\( in the prefactor is given by
+\)</span><span class="math notranslate nohighlight">\(p(x,z;x',z')=\sum_{i=1}^{N}\left(z_ix'_i-x_iz'_i + 2(z_i+z'_i)\left\lfloor\frac{x_i+x'_i}{2}\right\rfloor+2(x_i+x'_i)\left\lfloor\frac{z_i+z'_i}{2}\right\rfloor\right)\mod 4.\)</span>$</p></li>
+<li><p><strong>Commutation relation</strong>: two Pauli operator either commute to anticommute.
+$<span class="math notranslate nohighlight">\(\sigma_{(x,z)}\sigma_{(x',z')}=(-)^{c(x,z;x',z')}\sigma_{(x',z')}\sigma_{(x,z)},\)</span><span class="math notranslate nohighlight">\(
+where the *anticommutation indicator* \)</span>c<span class="math notranslate nohighlight">\( has a simpler form
+\)</span><span class="math notranslate nohighlight">\(c(x,z;x',z')=\frac{p(x,z;x',z')-p(x',z';x,z)}{2}=\sum_{i=1}^{N}\left(z_ix'_i-x_iz'_i\right)\mod 2.\)</span>$</p></li>
+</ul>
+<p>The binary vectors <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(z\)</span> can be interweaved into a <span class="math notranslate nohighlight">\(2N\)</span>-component vector <span class="math notranslate nohighlight">\(g=(x_0,z_0,x_1,z_1,\cdots)\)</span>, which forms the binary representation of a Pauli operator <span class="math notranslate nohighlight">\(\sigma_g\)</span>.</p>
+</section>
+<section id="stabilizer-tableau">
+<h4>Stabilizer Tableau<a class="headerlink" href="#stabilizer-tableau" title="Permalink to this headline">#</a></h4>
+<p>Each stabilizer state is internally stored in the form of a <strong>stabilizer tableau</strong> <span class="math notranslate nohighlight">\(S\)</span>, together with the <strong>sign indicator</strong> <span class="math notranslate nohighlight">\(b\)</span>. For a <span class="math notranslate nohighlight">\([N,r]\)</span> stabilizer state, its stabilizer tableau is a <span class="math notranslate nohighlight">\(2N\times 2N\)</span> matrix of the following structure</p>
+<img src="fig_tableau.png" alt="stabilizer tableau." style="width: 320px;"/><ul class="simple">
+<li><p>Each row is a binary representation <span class="math notranslate nohighlight">\((x,z)\)</span> of a Pauli oparator <span class="math notranslate nohighlight">\(\sigma_{(x,z)}\)</span>.</p></li>
+<li><p>Totally <span class="math notranslate nohighlight">\(2N\)</span> Pauli operators grouped into <span class="math notranslate nohighlight">\(N\)</span> stabilizers and <span class="math notranslate nohighlight">\(N\)</span> destabilizers, such that for <span class="math notranslate nohighlight">\(i,j=0,\cdots,2N-1\)</span>:
+$<span class="math notranslate nohighlight">\(\sigma_{g_{i}}\sigma_{g_{j}}=(-)^{\delta_{i+N,j}-\delta_{j+N,i}}\sigma_{g_{j}}\sigma_{g_{i}},\)</span><span class="math notranslate nohighlight">\(
+i.e. the \)</span>i<span class="math notranslate nohighlight">\(th stabilizer only anticommute with the \)</span>i$th destabilizer and they commute with all the other operators in the tableau.</p></li>
+<li><p>The rows <span class="math notranslate nohighlight">\(r:N\)</span> correspond to the <span class="math notranslate nohighlight">\(N-r\)</span> active stabilizers <span class="math notranslate nohighlight">\(S_k\)</span>, which stabilize the code subspace (impleted as projection operators). The rows <span class="math notranslate nohighlight">\(0:r\)</span> corresponds to the <span class="math notranslate nohighlight">\(r\)</span> standby (inactive) stabilizers that does not realy stabilizer the code subspace (but they will act as logical operators in the code subspace).</p></li>
+<li><p>The rows <span class="math notranslate nohighlight">\(N+r:2N\)</span> correspond to the <span class="math notranslate nohighlight">\(N-r\)</span> active destabilizers that anticommute with the active stabilizers. The rows <span class="math notranslate nohighlight">\(N:N+r\)</span> correspond to the <span class="math notranslate nohighlight">\(r\)</span> standby destabilizers taht anticommute with the standby stabilizers.</p></li>
+</ul>
+<p>Although the stabilizer state is only specified by the active stabilizers, the other operators in the stabilizer tableau are still important in order to complete the operator basis. Such that the tableau can specify an unitary operator in the Clifford group that generate the state. The algorithm must mantain the algebraic structure betwen all stabilizers and destabilizers while updating the tableau.</p>
+<p>Example: stabilizer tableau is given by <code class="docutils literal notranslate"><span class="pre">StabilizerState.gs</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;state is: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">rho</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>state is: 
+ StabilizerState(
+   -YIYX
+   +ZXYY
+   -XIZI
+   -ZZYZ)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">gs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 1, 0, 0, 1, 1, 1, 0],
+       [0, 1, 1, 0, 1, 1, 1, 1],
+       [1, 0, 0, 0, 0, 1, 0, 0],
+       [0, 1, 0, 1, 1, 1, 0, 1],
+       [1, 1, 1, 0, 1, 1, 0, 1],
+       [0, 0, 1, 1, 0, 1, 0, 1],
+       [1, 1, 1, 0, 0, 1, 1, 1],
+       [0, 1, 0, 0, 1, 1, 1, 1]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The sign of (de)stabilziers can be read through <code class="docutils literal notranslate"><span class="pre">StabilizerState.ps</span></code>, which returns the power of <span class="math notranslate nohighlight">\(i\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">ps</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2, 0, 2, 2, 0, 0, 0, 2])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="link-with-qutip-library">
+<h2>Link with QuTip Library<a class="headerlink" href="#link-with-qutip-library" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">identity_map</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_state</span><span class="p">()</span><span class="o">.</span><span class="n">gs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 1, 0, 0, 0, 0],
+       [0, 0, 0, 1, 0, 0],
+       [0, 0, 0, 0, 0, 1],
+       [1, 0, 0, 0, 0, 0],
+       [0, 0, 1, 0, 0, 0],
+       [0, 0, 0, 0, 1, 0]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">maximally_mixed_state</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">r</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">paulialg</span><span class="o">.</span><span class="n">paulis</span><span class="p">(</span><span class="n">paulialg</span><span class="o">.</span><span class="n">pauli</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">paulialg</span><span class="o">.</span><span class="n">pauli</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">gs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 1, 0, 0, 0, 0],
+       [0, 0, 0, 1, 0, 0]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">paulialg</span><span class="o">.</span><span class="n">paulis</span><span class="p">(</span><span class="n">paulialg</span><span class="o">.</span><span class="n">pauli</span><span class="p">({</span><span class="n">i</span><span class="p">:</span><span class="s1">&#39;Z&#39;</span><span class="p">},</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> +ZIII
+ +IZII
+ +IIZI
+ +IIIZ
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="development">
+<h2>Development<a class="headerlink" href="#development" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">context</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="test-unit-two-pure-state-overlap">
+<h3>Test Unit: two pure state overlap<a class="headerlink" href="#test-unit-two-pure-state-overlap" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_res</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">test_num</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">test_num</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">state2</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">((</span><span class="n">state</span><span class="o">.</span><span class="n">to_qutip</span><span class="p">())</span><span class="o">*</span><span class="p">(</span><span class="n">state2</span><span class="o">.</span><span class="n">to_qutip</span><span class="p">())))</span>
+    <span class="c1"># _, _, _, trace_test = utils.stabilizer_projection_trace(np.array(state.gs), np.array(state.ps), \</span>
+    <span class="c1">#                               np.array(state2.gs[:N,:]), np.array(state2.ps[:N]), state2.r)</span>
+    <span class="n">trace_test</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">state2</span><span class="p">)</span>
+    <span class="n">test_res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">trace</span><span class="o">==</span><span class="n">trace_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_res</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">test_res</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Stochastic test passed!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stochastic test passed!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="test-unit-pure-state-a-overlap-with-mixed-state-b">
+<h3>Test Unit: pure state A overlap with mixed state B<a class="headerlink" href="#test-unit-pure-state-a-overlap-with-mixed-state-b" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_res</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">test_num</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">rank</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">test_num</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">state2</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">state2</span><span class="o">.</span><span class="n">set_r</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">((</span><span class="n">state</span><span class="o">.</span><span class="n">to_qutip</span><span class="p">())</span><span class="o">*</span><span class="p">(</span><span class="n">state2</span><span class="o">.</span><span class="n">to_qutip</span><span class="p">())))</span>
+    <span class="c1"># _, _, _, trace_test = utils.stabilizer_projection_trace(np.array(state.gs), np.array(state.ps), \</span>
+    <span class="c1">#                               np.array(state2.gs[rank:N,:]), np.array(state2.ps[rank:N]), state.r)</span>
+    <span class="c1"># trace_test = trace_test/2**rank</span>
+    <span class="n">trace_test</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">state2</span><span class="p">)</span>
+    <span class="n">test_res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">trace_test</span><span class="o">==</span><span class="n">trace</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_res</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">test_res</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Stochastic test passed!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stochastic test passed!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">set_r</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">state2</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">state2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NotImplementedError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [6],</span> in <span class="ni">&lt;cell line: 4&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">state</span><span class="o">.</span><span class="n">set_r</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">state2</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">state</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">state2</span><span class="p">)</span>
+
+<span class="nn">File ~/Dropbox/Projects/Harvard/CliffordSimulator/doc/../src/stabilizer.py:155,</span> in <span class="ni">StabilizerState.expect</span><span class="nt">(self, obs, z)</span>
+<span class="g g-Whitespace">    </span><span class="mi">153</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">StabilizerState</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">154</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">155</span>         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Will be added in the next release!&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">156</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">157</span>         <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">trace</span> <span class="o">=</span> <span class="n">stabilizer_projection_trace</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gs</span><span class="p">),</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ps</span><span class="p">),</span> \
+<span class="g g-Whitespace">    </span><span class="mi">158</span>                           <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">obs</span><span class="o">.</span><span class="n">gs</span><span class="p">[</span><span class="n">obs</span><span class="o">.</span><span class="n">r</span><span class="p">:</span><span class="n">obs</span><span class="o">.</span><span class="n">N</span><span class="p">,:]),</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">obs</span><span class="o">.</span><span class="n">ps</span><span class="p">[</span><span class="n">obs</span><span class="o">.</span><span class="n">r</span><span class="p">:</span><span class="n">obs</span><span class="o">.</span><span class="n">N</span><span class="p">]),</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="ne">NotImplementedError</span>: Will be added in the next release!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">stabilizer</span><span class="o">.</span><span class="n">ghz_state</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_map</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>src.stabilizer.CliffordMap
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +YI
+   +YZ)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">density_matrix</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.25000 II +0.25000 YZ +0.25000 YI +0.25000 IZ
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state2</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state2</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">paulialg</span><span class="o">.</span><span class="n">paulis</span><span class="p">(</span><span class="s1">&#39;ZI&#39;</span><span class="p">,</span><span class="s1">&#39;IZ&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1, 0]), -1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">to_qutip</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}Quantum object: dims = [[2, 2], [2, 2]], shape = (4, 4), type = oper, isherm = True\begin{equation*}\left(\begin{array}{*{11}c}0.500 &amp; 0.0 &amp; -0.500j &amp; 0.0\\0.0 &amp; 0.0 &amp; 0.0 &amp; 0.0\\0.500j &amp; 0.0 &amp; 0.500 &amp; 0.0\\0.0 &amp; 0.0 &amp; 0.0 &amp; 0.0\\\end{array}\right)\end{equation*}\end{split}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qt</span><span class="o">.</span><span class="n">hadamard_transform</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/yw/q53qkg_s4w7gt_npx01mkfkh0000gn/T/ipykernel_7748/870472573.py:1: DeprecationWarning: Importing functions/classes of the qip submodule directly from the namespace qutip is deprecated. Please import them from the submodule instead, e.g.
+from qutip.qip.operations import cnot
+from qutip.qip.circuit import QubitCircuit
+
+  qt.hadamard_transform(1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = True\begin{equation*}\left(\begin{array}{*{11}c}0.707 &amp; 0.707\\0.707 &amp; -0.707\\\end{array}\right)\end{equation*}\end{split}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qt</span><span class="o">.</span><span class="n">hadamard_transform</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmay</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/yw/q53qkg_s4w7gt_npx01mkfkh0000gn/T/ipykernel_7748/223668697.py:1: DeprecationWarning: Importing functions/classes of the qip submodule directly from the namespace qutip is deprecated. Please import them from the submodule instead, e.g.
+from qutip.qip.operations import cnot
+from qutip.qip.circuit import QubitCircuit
+
+  qt.hadamard_transform(1)*qt.sigmay()
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\begin{equation*}\left(\begin{array}{*{11}c}0.707j &amp; -0.707j\\-0.707j &amp; -0.707j\\\end{array}\right)\end{equation*}\end{split}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">hadamard_transform</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/yw/q53qkg_s4w7gt_npx01mkfkh0000gn/T/ipykernel_7748/3014846647.py:1: DeprecationWarning: Importing functions/classes of the qip submodule directly from the namespace qutip is deprecated. Please import them from the submodule instead, e.g.
+from qutip.qip.operations import cnot
+from qutip.qip.circuit import QubitCircuit
+
+  qt.sigmaz()*qt.hadamard_transform(1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\begin{equation*}\left(\begin{array}{*{11}c}0.707 &amp; 0.707\\-0.707 &amp; 0.707\\\end{array}\right)\end{equation*}\end{split}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qt</span><span class="o">.</span><span class="n">hadamard_transform</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmax</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/yw/q53qkg_s4w7gt_npx01mkfkh0000gn/T/ipykernel_7748/2463032848.py:1: DeprecationWarning: Importing functions/classes of the qip submodule directly from the namespace qutip is deprecated. Please import them from the submodule instead, e.g.
+from qutip.qip.operations import cnot
+from qutip.qip.circuit import QubitCircuit
+
+  qt.hadamard_transform(1)*qt.sigmax()
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = False\begin{equation*}\left(\begin{array}{*{11}c}0.707 &amp; 0.707\\-0.707 &amp; 0.707\\\end{array}\right)\end{equation*}\end{split}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qt</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">(),</span><span class="n">qt</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}Quantum object: dims = [[2, 2], [2, 2]], shape = (4, 4), type = oper, isherm = True\begin{equation*}\left(\begin{array}{*{11}c}1.0 &amp; 0.0 &amp; 0.0 &amp; 0.0\\0.0 &amp; -1.0 &amp; 0.0 &amp; 0.0\\0.0 &amp; 0.0 &amp; -1.0 &amp; 0.0\\0.0 &amp; 0.0 &amp; 0.0 &amp; 1.0\\\end{array}\right)\end{equation*}\end{split}\]</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Hong-Ye Hu<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
