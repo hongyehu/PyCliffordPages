@@ -4,6 +4,8 @@ This is a `python` based clifford circuit simulation package which not only offe
 
 This open-source project is kindly supported by [the Unitary Fund](https://unitary.fund/grants.html)
 
+Main contributor: Hong-Ye Hu, Taylor Patti, Andi Gu, Yi Tan, Susanne Yelin, Yi-Zhuang You
+
 
 ```{tableofcontents}
 ```
