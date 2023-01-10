@@ -1,0 +1,868 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2.1. Construct Clifford Maps &#8212; PyClifford</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.5. Methods for Clifford maps" href="Stabilizer2.html" />
+    <link rel="prev" title="2. State-Map Duality" href="StabilizerIntro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">PyClifford</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    PyClifford - an python based simulator for Clifford-dominated quantum circuits
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="PauliIntro.html">
+   1. Pauli operators and its functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Pauli1.html">
+     1.1. Pauli operator
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Pauli2.html">
+     1.4. Pauli Algebra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Pauli3.html">
+     1.6. Convert to Qutip objects
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="StabilizerIntro.html">
+   2. Stabilizer States and Clifford Maps
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2.1. Construct Clifford Maps
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Stabilizer2.html">
+     2.5. The methods for Clifford maps
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Stabilizer3.html">
+     2.6. The methods for stabilizer states
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/hongyehu/PyClifford/master?urlpath=tree/docs/chapters/Stabilizer1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/hongyehu/PyClifford"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/hongyehu/PyClifford/issues/new?title=Issue%20on%20page%20%2Fchapters/Stabilizer1.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/chapters/Stabilizer1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2.1. Construct Clifford Maps
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#construct-stabilizer-states">
+   2.2. Construct Stabilizer States
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#construct-stabilizer-states-by-checker-matrix">
+   2.3. Construct Stabilizer States by Checker Matrix
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#state-map-convertion">
+   2.4. State-Map convertion
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Construct Clifford Maps</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2.1. Construct Clifford Maps
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#construct-stabilizer-states">
+   2.2. Construct Stabilizer States
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#construct-stabilizer-states-by-checker-matrix">
+   2.3. Construct Stabilizer States by Checker Matrix
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#state-map-convertion">
+   2.4. State-Map convertion
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">import</span> <span class="nn">src</span>
+<span class="kn">from</span> <span class="nn">src</span> <span class="kn">import</span> <span class="p">(</span><span class="n">utils</span><span class="p">,</span> <span class="n">paulialg</span><span class="p">,</span> <span class="n">stabilizer</span><span class="p">,</span> <span class="n">circuit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="construct-clifford-maps">
+<h1><span class="section-number">2.1. </span>Construct Clifford Maps<a class="headerlink" href="#construct-clifford-maps" title="Permalink to this headline">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">identity_map(N)</span></code> constructs an identity Clifford map on <span class="math notranslate nohighlight">\(N\)</span> qubits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">identity_map</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; +XIII
+  Z0-&gt; +ZIII
+  X1-&gt; +IXII
+  Z1-&gt; +IZII
+  X2-&gt; +IIXI
+  Z2-&gt; +IIZI
+  X3-&gt; +IIIX
+  Z3-&gt; +IIIZ)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">random_pauli_map(N)</span></code> samples a random Clifford map made of random single-qubit Clifford gates on <span class="math notranslate nohighlight">\(N\)</span> qubits, i.e. <span class="math notranslate nohighlight">\(U=\prod_i U_i\in\mathrm{Cl}(2)^N\)</span>. Each realization specifies a random local Pauli basis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">random_pauli_map</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; -YIII
+  Z0-&gt; -ZIII
+  X1-&gt; +IZII
+  Z1-&gt; +IXII
+  X2-&gt; +IIZI
+  Z2-&gt; -IIYI
+  X3-&gt; +IIIZ
+  Z3-&gt; +IIIX)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">random_clifford_map(N)</span></code> samples a globally random Clifford map on <span class="math notranslate nohighlight">\(N\)</span> qubits, i.e. <span class="math notranslate nohighlight">\(U\in\mathrm{Cl}(2^N)\)</span>. Each realization specifies a random global stabilizer basis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_map</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; -XXIX
+  Z0-&gt; +IXXY
+  X1-&gt; +ZZXX
+  Z1-&gt; -IYYY
+  X2-&gt; +YXYZ
+  Z2-&gt; +YIIY
+  X3-&gt; -XZIZ
+  Z3-&gt; +ZIZZ)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">clifford_rotation_map(N)</span></code> constructs a Clifford map based for a Clifford rotation given its generator.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">clifford_rotation_map</span><span class="p">(</span><span class="s1">&#39;-XXYZ&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; +XIII
+  Z0-&gt; +YXYZ
+  X1-&gt; +IXII
+  Z1-&gt; +XYYZ
+  X2-&gt; +XXZZ
+  Z2-&gt; -XXXZ
+  X3-&gt; -XXYY
+  Z3-&gt; +IIIZ)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="construct-stabilizer-states">
+<h1><span class="section-number">2.2. </span>Construct Stabilizer States<a class="headerlink" href="#construct-stabilizer-states" title="Permalink to this headline">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">maximally_mixed_state(N)</span></code> constructs a <span class="math notranslate nohighlight">\(N\)</span>-qubit maximally mixed state (by setting the density matrix to full rank).
+$<span class="math notranslate nohighlight">\(\rho=2^{-N}\mathbb{1}.\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">maximally_mixed_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState()
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">zero_state(N)</span></code> constructs a <span class="math notranslate nohighlight">\(N\)</span>-qubit all-zero state
+$<span class="math notranslate nohighlight">\(\rho=|0\cdots0\rangle\langle 0\cdots0|=\prod_{i}\frac{1+Z_i}{2}.\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">zero_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +ZIII
+   +IZII
+   +IIZI
+   +IIIZ)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">one_state(N)</span></code> constructs a <span class="math notranslate nohighlight">\(N\)</span>-qubit all-one state
+$<span class="math notranslate nohighlight">\(\rho=|1\cdots1\rangle\langle 1\cdots1|=\prod_{i}\frac{1-Z_i}{2}.\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">zero_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">ps</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 0, 0, 0, 0, 0, 0])
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ghz_state(N)</span></code> constructs a <span class="math notranslate nohighlight">\(N\)</span>-qubit GHZ state
+$<span class="math notranslate nohighlight">\(\rho = |\Psi\rangle\langle\Psi|, \qquad \text{with }|\Psi\rangle=\frac{1}{\sqrt{2}}(|0\cdots0\rangle+|1\cdots1\rangle).\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">ghz_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +ZZII
+   +IZZI
+   +IIZZ
+   +XXXX)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">random_pauli_map(N)</span></code> samples a <span class="math notranslate nohighlight">\(N\)</span> qubit random Pauli state.
+$<span class="math notranslate nohighlight">\(\rho=U|0\cdots0\rangle\langle 0\cdots0|U^\dagger,\qquad\text{with }U\in \mathrm{Cl}(2)^N.\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">random_pauli_map</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; -ZIII
+  Z0-&gt; +YIII
+  X1-&gt; +IZII
+  Z1-&gt; +IXII
+  X2-&gt; -IIZI
+  Z2-&gt; +IIXI
+  X3-&gt; -IIIY
+  Z3-&gt; +IIIZ)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">random_clifford_map(N)</span></code> samples a <span class="math notranslate nohighlight">\(N\)</span> qubit random Clifford (random stabilizer) state.
+$<span class="math notranslate nohighlight">\(\rho=U|0\cdots0\rangle\langle 0\cdots0|U^\dagger,\qquad\text{with }U\in \mathrm{Cl}(2^N).\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +IIIY
+   +XXXI
+   +IXXY
+   +XIXI)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">stabilizer_state(...)</span></code> is a universal constructor of stabilizer state by specifying all stabilizers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">stabilizer_state</span><span class="p">(</span><span class="s1">&#39;XXY&#39;</span><span class="p">,</span><span class="s1">&#39;ZZI&#39;</span><span class="p">,</span><span class="s1">&#39;IZZ&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +XXY
+   +ZZI
+   +IZZ)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="construct-stabilizer-states-by-checker-matrix">
+<h1><span class="section-number">2.3. </span>Construct Stabilizer States by Checker Matrix<a class="headerlink" href="#construct-stabilizer-states-by-checker-matrix" title="Permalink to this headline">#</a></h1>
+<p>The user can also construct stabilizer state by low-level constructor <code class="docutils literal notranslate"><span class="pre">StabilizerState(gs,</span> <span class="pre">ps,</span> <span class="pre">r=0)</span></code>:</p>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gs:</span> <span class="pre">int</span> <span class="pre">(2*N,</span> <span class="pre">2*N)</span></code>: strings of Pauli operators in the stabilizer tableau.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ps:</span> <span class="pre">int</span> <span class="pre">(2*N)</span></code>: phase indicators (should only be 0 or 2).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r:</span>&#160; <span class="pre">int</span></code>: number of logical qubits (log2 rank of density matrix)’’’</p></li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul class="simple">
+<li><p>Object of <code class="docutils literal notranslate"><span class="pre">StabilizerState</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmp_state</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">random_clifford_state</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tmp_state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +YXY
+   +XYY
+   +ZIZ)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gs</span> <span class="o">=</span> <span class="n">tmp_state</span><span class="o">.</span><span class="n">gs</span>
+<span class="n">ps</span> <span class="o">=</span> <span class="n">tmp_state</span><span class="o">.</span><span class="n">ps</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">StabilizerState</span><span class="p">(</span><span class="n">gs</span><span class="o">=</span><span class="n">gs</span><span class="p">,</span><span class="n">ps</span><span class="o">=</span><span class="n">ps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +YXY
+   +XYY
+   +ZIZ)
+</pre></div>
+</div>
+</div>
+</div>
+<p>A hack to inspect the full stabilizer tableau is by converting <code class="docutils literal notranslate"><span class="pre">StabilizerState</span></code> to <code class="docutils literal notranslate"><span class="pre">PauliList</span></code> by</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stabilizer</span><span class="o">.</span><span class="n">stabilizer_state</span><span class="p">(</span><span class="s1">&#39;XXY&#39;</span><span class="p">,</span><span class="s1">&#39;ZZI&#39;</span><span class="p">,</span><span class="s1">&#39;IZZ&#39;</span><span class="p">)[:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> +XXY
+ +ZZI
+ +IZZ
+ +ZII
+ +ZXX
+ +ZIX
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="state-map-convertion">
+<h1><span class="section-number">2.4. </span>State-Map convertion<a class="headerlink" href="#state-map-convertion" title="Permalink to this headline">#</a></h1>
+<p>Stabilizer states and Clifford maps can be mapped to each other.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="n">stabilizer</span><span class="o">.</span><span class="n">stabilizer_state</span><span class="p">(</span><span class="s1">&#39;XXX&#39;</span><span class="p">,</span><span class="s1">&#39;ZZI&#39;</span><span class="p">,</span><span class="s1">&#39;IZZ&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;quantum state: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">rho</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>quantum state: 
+ StabilizerState(
+   +XXX
+   +ZZI
+   +IZZ)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">to_map</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CliffordMap(
+  X0-&gt; +ZII
+  Z0-&gt; +XXX
+  X1-&gt; +IXX
+  Z1-&gt; +ZZI
+  X2-&gt; +IIX
+  Z2-&gt; +IZZ)
+</pre></div>
+</div>
+</div>
+</div>
+<p>And Clifford map can be converted back to the stabilizer state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">to_map</span><span class="p">()</span><span class="o">.</span><span class="n">to_state</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StabilizerState(
+   +XXX
+   +ZZI
+   +IZZ)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.to_map()</span></code> and <code class="docutils literal notranslate"><span class="pre">.to_state()</span></code> will make <strong>new copies</strong> of Pauli string data in the memory.</p></li>
+</ul>
+<div class="alert alert-block alert-danger">
+The information about the rank of the density matrix is lost in the Clifford map, so the back conversion will result in a zero rank stabilizer state.
+</div></section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="StabilizerIntro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">2. </span>State-Map Duality</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Stabilizer2.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.5. </span>Methods for Clifford maps</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Hong-Ye Hu<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

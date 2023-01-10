@@ -1,0 +1,40 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+title: Introduction
+options:
+  numbered: true
+chapters:
+- file: chapters/PauliIntro
+  title: Pauli operators and its functions
+  sections:
+  - file: chapters/Pauli1
+    title: Pauli Operators and Constructors
+  - file: chapters/Pauli2
+    title: Pauli Algebra and Functions
+  - file: chapters/Pauli3
+    title: Convert to Qutip objects
+- file: chapters/StabilizerIntro
+  title: Stabilizer States and Clifford Maps
+  sections:
+  - file: chapters/Stabilizer1
+    title: How to construct stabilizer states and Clifford maps
+  - file: chapters/Stabilizer2
+    title: The methods for Clifford maps
+  - file: chapters/Stabilizer3
+    title: The methods for stabilizer states
+- file: chapters/CCircuitIntro
+  title: Clifford gates, Clifford layers, and Clifford circuits
+  sections:
+  - file: chapters/Circuit1
+    title: Clifford Gates
+  - file: chapters/Circuit2
+    title: Clifford Layers
+  - file: chapters/Circuit3
+    title: Clifford Circuits
+#- file: markdown
+#- file: notebooks
+#- file: markdown-notebooks
+#- file: newmarkdown
